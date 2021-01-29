@@ -1,1 +1,1 @@
-und die Tüte sofort mit Cookie besiedelt!
+Browser Console game of rock paper scissors, with 5 rounds.
