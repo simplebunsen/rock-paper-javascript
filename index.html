@@ -1,0 +1,101 @@
+<head>
+
+</head>
+
+<body>
+    <script>
+        let rock = "ROCK";
+        let paper = "PAPER";
+        let scissors = "SCISSORS";
+
+        let loseString = "You Lose! ";
+        let winString = "You Win! ";
+
+        let botScore = 0;
+        let humanScore = 0;
+
+
+        function computerPlay(){
+            let die = Math.random();
+            die = Math.floor(die * 3);
+            //console.log("die is " + die);
+
+            switch(die) {
+                case 0: return rock;
+                case 1: return paper;
+                case 2: return scissors
+                default: return "COCKANDBALLS";
+            }
+        }
+
+        function game() {
+            for (i = 0; i < 5; i++) {
+                let result = playRound(window.prompt("What will you choose?", "Rock, Paper or Scissors"), computerPlay());
+                console.log(result);
+            }
+            if (botScore > humanScore) {
+                console.log("Bot wins!");
+            } else if (botScore == humanScore) {
+                console.log("Tie Game");
+            } else {
+                console.log("Humans win!")
+            }
+        }
+
+
+        function playRound(playerSelection, computerSelection){
+            playerSelection = playerSelection.toUpperCase();
+            
+            if (playerSelection != rock && playerSelection != paper && playerSelection != scissors) {
+                return "Stupid head input an illegal move."
+            }
+
+            if (playerSelection == computerSelection) {
+                return "Draw."
+            }
+
+            switch (playerSelection) {
+                case rock: {
+                    if (computerSelection == paper) {
+                        return lose() + getMoveString(computerSelection, playerSelection);
+                    } 
+                    else if (computerSelection == scissors){
+                        return win() + getMoveString(playerSelection, computerSelection);
+                    }
+                }
+                case paper: {
+                    if (computerSelection == scissors) {
+                        return lose() + getMoveString(computerSelection, playerSelection);
+                    } 
+                    else if (computerSelection == rock){
+                        return win() + getMoveString(playerSelection, computerSelection);
+                    }
+                }
+                case scissors: {
+                    if (computerSelection == rock) {
+                        return lose() + getMoveString(computerSelection, playerSelection);
+                    } 
+                    else if (computerSelection == paper){
+                        return win() + getMoveString(playerSelection, computerSelection);
+                    }
+                }
+            }
+        }
+
+        function win() {
+            humanScore++;
+            return winString;
+        }
+
+        function lose() {
+            botScore++;
+            return loseString;
+        }
+
+        function getMoveString(better, worse) {
+            return better + " beats " + worse;
+        }
+
+
+    </script>
+</body>
